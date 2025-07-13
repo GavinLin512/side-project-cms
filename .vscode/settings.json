@@ -1,0 +1,7 @@
+// 確保 Biome 僅在此項目中運行，而其他專案保持不變。
+{
+  "editor.defaultFormatter": "biomejs.biome", // 將 Biome 配置為該專案的預設格式化程式
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "explicit" // 在保存時顯示 Biome 的快速修復建議
+  }
+}

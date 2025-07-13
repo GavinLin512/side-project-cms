@@ -1,0 +1,26 @@
+# 在不同的編輯器和 IDE 中實施一致的編碼樣式
+
+# 根目錄
+root = true
+
+[*]
+# 使用空格縮排
+indent_style = space
+# 雙空格縮排
+indent_size = 2
+# 換行符號
+end_of_line = lf
+# 字符編碼
+charset = utf-8
+# 移除行尾空白
+trim_trailing_whitespace = true
+# 在文件末尾插入新行
+insert_final_newline = true
+
+[*.{json,yml,yaml}]
+# 雙空格縮排
+indent_size = 2
+# 使用空格縮排
+indent_style = space
+# 在文件末尾插入新行
+insert_final_newline = true

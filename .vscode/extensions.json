@@ -1,0 +1,4 @@
+// 提示團隊中的其他開發人員安裝 Biome 外掛程式
+{
+  "recommendations": ["biomejs.biome"]
+}
