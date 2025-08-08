@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ShoppingCart, Heart, Search, User, Sprout } from 'lucide-react';
-import type { HeaderNavigationMenuLinkProps, HeaderNavigationMenuProps } from '../../_types/type';
+import type { HeaderNavigationMenuLinkProps, HeaderNavigationMenuProps } from '../_types/type';
 import { HeaderNavigationMenu } from '@/customer/_components/headerNavigationMenu';
 import HeaderMenu from '@/customer/_components/headerMenu';
 
@@ -20,7 +20,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-background text-primary px-8 py-1 border-b-2 fixed w-full">
+    <header className="bg-background text-primary px-8 py-1 border-b-2 fixed w-full z-99">
       <div className="container mx-auto flex justify-between items-center relative">
         {/* Left Section */}
         <div className="flex items-center space-x-6">

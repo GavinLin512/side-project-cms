@@ -21,12 +21,17 @@ interface HeroCardProps {
   description: string;
 }
 
+type SectionContainerProps = {
+  children: ReactNode;
+};
+
 
 export type {
   HeaderMenuItemsProps,
   HeroCardProps,
   HeaderNavigationMenuProps,
-  HeaderNavigationMenuLinkProps
+  HeaderNavigationMenuLinkProps,
+  SectionContainerProps,
 };
 
 

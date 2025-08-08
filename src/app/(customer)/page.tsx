@@ -1,15 +1,13 @@
-import Header from '@/customer/_components/layouts/Header';
-import HeroSection from '@/customer/_components/HeroSection';
+import HeroSection from '@/app/(customer)/_components/heroSection';
 import AIShoppingAssistant from '@/features/ai/AIShoppingAssistant';
+import CategoriesSection from './_components/categoriesSection';
 
 export default function Home() {
   return (
-    <div className="bg-background">
-      <Header />
-      <main>
-        <HeroSection />
-      </main>
+    <>
+      <HeroSection />
+      <CategoriesSection />
       <AIShoppingAssistant />
-    </div>
+    </>
   );
 }
