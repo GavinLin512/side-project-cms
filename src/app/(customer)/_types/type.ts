@@ -30,6 +30,7 @@ interface productItemsProps {
   image: string;
   name: string;
   price: number;
+  discount?: number;
 }
 
 

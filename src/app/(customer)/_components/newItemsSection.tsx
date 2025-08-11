@@ -3,8 +3,8 @@ import SectionContainer from "@/app/(customer)/_components/sectionContainer"
 import SectionTitle from "@/app/(customer)/_components/sectionTitle"
 import { ProductItems } from "@/app/(customer)/_components/carouselItems/productCard"
 
-const PopularProductsSection = () => {
-  const popularProducts = [
+const NewItemsSection = () => {
+  const newItems = [
     { id: 1, image: "/banner.jpg", name: "永續生活", price: 100 },
     { id: 2, image: "/banner.jpg", name: "環保餐具", price: 100 },
     { id: 3, image: "/banner.jpg", name: "天然清潔", price: 100 },
@@ -16,12 +16,12 @@ const PopularProductsSection = () => {
   ]
   return (
     <SectionContainer>
-      <SectionTitle title="Popular Products" />
+      <SectionTitle title="New Items" />
       <CarouselSize>
-        <ProductItems products={popularProducts} tag={"popular"} />
+        <ProductItems products={newItems} tag={"new"} />
       </CarouselSize>
     </SectionContainer>
   )
 }
 
-export default PopularProductsSection
+export default NewItemsSection

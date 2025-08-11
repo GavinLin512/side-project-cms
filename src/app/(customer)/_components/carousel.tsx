@@ -1,4 +1,5 @@
 "use client"
+
 import {
   Carousel,
   CarouselContent,
@@ -21,7 +22,7 @@ export function CarouselSize({ children }: { children: React.ReactNode }) {
       className="w-full"
       plugins={[
         Autoplay({
-          delay: 2000,
+          delay: 5000,
         }),
       ]}
     >

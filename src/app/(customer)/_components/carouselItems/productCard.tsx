@@ -9,7 +9,7 @@ import { useState } from "react"
 import type { productItemsProps } from "@/app/(customer)/_types/type"
 
 // This component now generates the list of items, not just one card.
-export function ProductItems({ products }: { products: productItemsProps[] }) {
+export function ProductItems({ products, tag }: { products: productItemsProps[], tag: "new" | "popular" | "onSale" | undefined }) {
   const [likedItems, setLikedItems] = useState(new Set<number>())
 
   const toggleLike = (productId: number) => {
@@ -30,6 +30,7 @@ export function ProductItems({ products }: { products: productItemsProps[] }) {
     <>
       {products.map((product) => {
         const isLiked = likedItems.has(product.id)
+        const discountedPrice = Math.round(product.price * (1 - (product.discount ?? 0) / 100)).toFixed(0)
         return (
           <CarouselItem
             key={product.id}
@@ -51,19 +52,37 @@ export function ProductItems({ products }: { products: productItemsProps[] }) {
                     className="group absolute top-2 right-2 h-10 w-10 p-0 rounded-full bg-white text-center font-medium text-primary transition-colors hover:bg-background cursor-pointer"
                   >
                     <Heart
-                      className={`h-8 w-8 transition-colors ${
-                        isLiked
-                          ? "fill-red-500 text-red-500"
-                          : "text-primary group-hover:fill-red-500 group-hover:text-red-500"
-                      }`}
+                      className={`h-8 w-8 transition-colors ${isLiked
+                        ? "fill-red-500 text-red-500"
+                        : "text-primary group-hover:fill-red-500 group-hover:text-red-500"
+                        }`}
                       strokeWidth={3}
                     />
                   </Button>
+                  {tag === "new" && (
+                    <div className="absolute top-0 left-0 rounded-tl-lg rounded-br-lg bg-primary w-1/3 py-1.5 text-center text-lg font-medium text-white">
+                      New
+                    </div>
+                  )}
+                  {tag === "onSale" && (
+                    <div className="absolute top-0 left-6 rounded-b-lg bg-red-800 px-2 py-6 text-center text-lg font-medium text-white">
+                      -{product.discount}%
+                    </div>
+                  )}
                 </CardContent>
               </Card>
               <div className="flex flex-col items-start">
                 <div className="text-2xl font-medium mt-2">{product.name}</div>
-                <p className="text-lg text-gray-500">$ {product.price}</p>
+                <div className="flex items-center gap-2">
+                  {tag === "onSale" && product.discount && (
+                    <p className="text-3xl text-red-800 font-bold">
+                      $ {discountedPrice}
+                    </p>
+                  )}
+                  <p className={`text-3xl text-primary font-bold ${tag === "onSale" && "line-through opacity-50"}`}>
+                    $ {product.price}
+                  </p>
+                </div>
               </div>
               <Button variant="secondary" className="text-lg w-full mt-2 cursor-pointer">
                 Add to Cart

@@ -1,4 +1,5 @@
 import Header from '@/app/(customer)/_components/header';
+import Footer from '@/app/(customer)/_components/footer';
 
 export default function CustomerLayout({
   children,
@@ -9,6 +10,7 @@ export default function CustomerLayout({
     <div className="bg-background">
       <Header />
       <main>{children}</main>
+      <Footer />
     </div>
   )
 }
