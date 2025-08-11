@@ -25,6 +25,13 @@ type SectionContainerProps = {
   children: ReactNode;
 };
 
+interface productItemsProps {
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+}
+
 
 export type {
   HeaderMenuItemsProps,
@@ -32,6 +39,7 @@ export type {
   HeaderNavigationMenuProps,
   HeaderNavigationMenuLinkProps,
   SectionContainerProps,
+  productItemsProps,
 };
 
 
