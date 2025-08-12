@@ -20,7 +20,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-background text-primary px-8 py-1 border-b-2 fixed w-full z-99">
+    <header className="bg-background text-primary px-8 py-8.5 lg:py-1 border-b-2 fixed w-full z-99">
       <div className="container mx-auto flex justify-between items-center relative">
         {/* Left Section */}
         <div className="flex items-center space-x-6">
@@ -30,7 +30,7 @@ const Header = () => {
           <nav>
             <HeaderNavigationMenu {...menuProps} />
           </nav>
-          <div className="text-lg font-semibold text-primary">+38057 000 00 00</div>
+          <div className="hidden lg:block text-md xl:text-lg font-semibold text-primary">+38057 000 00 00</div>
         </div>
 
         {/* Center Section - Absolutely Centered */}
@@ -41,15 +41,15 @@ const Header = () => {
 
         {/* Right Section */}
         <div className="flex items-center space-x-6">
-          <Link href="/search" className="flex items-center space-x-1 hover:text-secondary">
+          <Link href="/search" className="hidden lg:flex items-center space-x-1 hover:text-secondary">
             <Search size={20} />
             <span>Search</span>
           </Link>
-          <Link href="/account" className="flex items-center space-x-1 hover:text-secondary">
+          <Link href="/account" className="hidden lg:flex items-center space-x-1 hover:text-secondary">
             <User size={20} />
             <span>Account</span>
           </Link>
-          <Link href="/wishlist" className="flex items-center space-x-1 hover:text-secondary">
+          <Link href="/wishlist" className="hidden lg:flex items-center space-x-1 hover:text-secondary">
             <Heart size={20} />
             <span>Wishlist</span>
           </Link>

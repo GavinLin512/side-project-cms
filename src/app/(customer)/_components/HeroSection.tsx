@@ -22,19 +22,21 @@ const HeroSection = () => {
   return (
     <SectionContainer>
       {/* Top Text Content */}
-      <div className="mb-6 space-y-6 flex flex-col xl:flex-row items-start xl:items-end justify-between w-full">
-        <h1 className="text-5xl md:text-7xl font-serif tracking-wider mb-0">
+      <div className="mb-6 space-y-6 flex flex-col lg:flex-row items-center lg:items-end justify-between w-full">
+        <h1 className="w-full sm:w-auto text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-serif tracking-wider mb-0">
           <span className="block">GREEN CITY STYLE</span>
         </h1>
-        <Button size="lg" className="mb-2 text-xl px-20 py-6 bg-primary hover:bg-secondary text-primary-foreground">
+        <Button size="lg" className="hidden lg:flex mb-2 text-xl px-20 py-6 bg-primary hover:bg-secondary text-primary-foreground">
           Go to catalog
         </Button>
       </div>
       <div className="space-y-6 flex flex-col-reverse xl:flex-row items-center justify-between w-full">
-        <p className="text-lg max-w-md">
-          Welcome to our eco-conscious store, where sustainability meets style! Discover a curated collection of eco friendly products
-        </p>
-        <h1 className="pb-10 text-5xl md:text-7xl font-serif tracking-wider">
+        <div className='flex items-center justify-start sm:w-3/4 lg:w-1/2 xl:w-1/3'>
+          <p className="text-lg max-w-md ">
+            Welcome to our eco-conscious store, where sustainability meets style! Discover a curated collection of eco friendly products
+          </p>
+        </div>
+        <h1 className="pb-10 w-full sm:w-auto text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-serif tracking-wider">
           <span className="block">ECO GOODS STORE</span>
         </h1>
       </div>

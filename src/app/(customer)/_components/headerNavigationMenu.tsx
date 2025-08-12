@@ -12,7 +12,7 @@ import Link from 'next/link';
 
 export function HeaderNavigationMenu(props: HeaderNavigationMenuProps) {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="hidden lg:block">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger className='py-12 px-6 text-lg'>{props.menuText??''}</NavigationMenuTrigger>
