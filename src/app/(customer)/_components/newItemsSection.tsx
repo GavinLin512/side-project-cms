@@ -1,5 +1,4 @@
 import { CarouselSize } from "@/app/(customer)/_components/carousel"
-import SectionContainer from "@/app/(customer)/_components/sectionContainer"
 import SectionTitle from "@/app/(customer)/_components/sectionTitle"
 import { ProductItems } from "@/app/(customer)/_components/carouselItems/productCard"
 
@@ -15,12 +14,12 @@ const NewItemsSection = () => {
     { id: 8, image: "/banner.jpg", name: "環保書籍", price: 100 },
   ]
   return (
-    <SectionContainer>
+    <>
       <SectionTitle title="New Items" />
       <CarouselSize>
         <ProductItems products={newItems} tag={"new"} />
       </CarouselSize>
-    </SectionContainer>
+    </>
   )
 }
 

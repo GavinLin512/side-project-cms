@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/card"
 import { Gift, Leaf, Medal, Rocket } from 'lucide-react';
 import type { HeroCardProps } from '@/customer/_types/type';
-import SectionContainer from '@/customer/_components/sectionContainer';
 
 
 const HeroSection = () => {
@@ -20,7 +19,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <SectionContainer>
+    <>
       {/* Top Text Content */}
       <div className="mb-6 space-y-6 flex flex-col lg:flex-row items-center lg:items-end justify-between w-full">
         <h1 className="w-full sm:w-auto text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-serif tracking-wider mb-0">
@@ -67,7 +66,7 @@ const HeroSection = () => {
           </Card>
         ))}
       </div>
-    </SectionContainer>
+    </>
   );
 };
 

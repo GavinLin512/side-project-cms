@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+  schemas   = ["public"]
+}
+
+// user 資訊
+model Profile {
+  id            String         @id @default(uuid()) @db.Uuid
+  cartItems     CartItem[]
+  orders        Order[]
+  reviews       Review[]
+  wishlistItems WishlistItem[]
+  userId        String         @unique @default(uuid()) @db.Uuid // 需要自行連結 supabase auth.users 建立關聯
+  name          String         
+
+  @@schema("public")
+}
