@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  quality-check:
+    name: Quality & Build Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 1. 程式碼風格檢查 (Linting & Formatting)
+      # 使用 Biome 因為專案中有 biome.json
+      - name: Lint & Format Check (Biome)
+        run: pnpm exec biome ci .
+
+      # 2. 型別檢查 (Type Checking)
+      # 這步最重要，確保沒有 TypeScript 錯誤
+      - name: Type Check
+        run: pnpm exec tsc --noEmit
+
+      # 3. 建置測試 (Build Test)
+      # 確保專案真的可以被 Build 出來，而不會在部署時才爆掉
+      # 注意：這一步需要環境變數，請在 GitHub Secrets 設定
+      - name: Build Test
+        run: pnpm build
+        env:
+          # 這些是 Build Time 需要的公開變數，如果不設定 Build 可能會失敗
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          # 如果有其他必須的 Server-side env，也建議加在這裡，或者 Mock 它們

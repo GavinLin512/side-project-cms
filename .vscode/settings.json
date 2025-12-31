@@ -2,6 +2,9 @@
 {
   "editor.defaultFormatter": "biomejs.biome", // 將 Biome 配置為該專案的預設格式化程式
   "editor.codeActionsOnSave": {
-    "quickfix.biome": "explicit" // 在保存時顯示 Biome 的快速修復建議
-  }
+    "quickfix.biome": "explicit", // 在保存時顯示 Biome 的快速修復建議
+    "source.organizeImports.biome": "explicit", // 在保存時自動整理 import
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "prisma.pinToPrisma6": false
 }
