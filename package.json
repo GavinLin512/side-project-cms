@@ -57,5 +57,14 @@
   },
   "prisma": {
     "schema": "./prisma"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "@prisma/engines",
+      "prisma"
+    ],
+    "onlyBuiltDependencies": [
+      "supabase"
+    ]
   }
 }
