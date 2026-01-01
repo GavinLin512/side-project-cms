@@ -1,5 +1,4 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase/admin";
 
 export async function GET(req: NextRequest) {
   console.log(req.method);
@@ -20,7 +19,7 @@ export async function GET(req: NextRequest) {
     console.error("API error:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

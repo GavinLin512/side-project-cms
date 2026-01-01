@@ -33,7 +33,6 @@ interface productItemsProps {
   discount?: number;
 }
 
-
 export type {
   HeaderMenuItemsProps,
   HeroCardProps,
@@ -42,5 +41,3 @@ export type {
   SectionContainerProps,
   productItemsProps,
 };
-
-

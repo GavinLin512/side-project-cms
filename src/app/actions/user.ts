@@ -1,7 +1,6 @@
 "use server";
 
 import { createServerClient } from "@/utils/supabase/server";
-import { getErrorMessage } from "@/lib/utils";
 
 // 取得 user 資料
 export async function getUser() {
@@ -42,18 +41,18 @@ export async function getRoles() {
 export async function isAdmin() {
   try {
     const roleRows = await getRoles();
-    
+
     // 將回傳的角色資料列轉換為字串陣列，並移除重複值與空值
     const roles = Array.from(
       new Set(
         (roleRows ?? [])
           .map((r: { role?: string }) => r.role)
-          .filter(Boolean) as string[]
-      )
+          .filter(Boolean) as string[],
+      ),
     );
-    
+
     console.log("[Auth] 當前使用者角色:", roles);
-    
+
     // 檢查是否包含管理員角色
     const isAdmin = roles.includes("admin");
     return isAdmin;

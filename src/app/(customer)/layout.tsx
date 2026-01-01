@@ -1,9 +1,9 @@
-import { getServerSession } from "@/utils/supabase/auth";
+import { Toaster } from "sonner";
+import Footer from "@/app/(customer)/_components/footer";
+import Header from "@/app/(customer)/_components/header/header";
 import { AuthProvider } from "@/providers/auth-provider";
-import Header from '@/app/(customer)/_components/header/header';
-import Footer from '@/app/(customer)/_components/footer';
-import { Toaster } from 'sonner';
-import SectionContainer from './_components/sectionContainer';
+import { getServerSession } from "@/utils/supabase/auth";
+import SectionContainer from "./_components/sectionContainer";
 
 export default async function CustomerLayout({
   children,
@@ -19,9 +19,7 @@ export default async function CustomerLayout({
         <Toaster />
         <Header />
         <main className="flex-grow">
-          <SectionContainer>
-            {children}
-          </SectionContainer>
+          <SectionContainer>{children}</SectionContainer>
         </main>
         <Footer />
       </div>

@@ -1,9 +1,6 @@
-import { createServerClient } from "@supabase/ssr";
-import { NextResponse, type NextRequest } from "next/server";
+import { type CookieOptions, createServerClient } from "@supabase/ssr";
+import { type NextRequest, NextResponse } from "next/server";
 import { isAdmin } from "@/app/actions/user";
-
-// 定義用戶角色類型
-type UserRole = "admin" | "customer" | null;
 
 // 路由配置
 const ROUTE_CONFIG = {
@@ -50,26 +47,35 @@ export async function updateSession(request: NextRequest) {
   });
 
   const supabase = createServerClient(
+    // biome-ignore lint/style/noNonNullAssertion: <shadcn 本身套件設定，不檢查>
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    // biome-ignore lint/style/noNonNullAssertion: <shadcn 本身套件設定，不檢查>
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
         getAll() {
           return request.cookies.getAll();
         },
-        setAll(cookiesToSet) {
+        setAll(
+          cookiesToSet: {
+            name: string;
+            value: string;
+            options: CookieOptions;
+          }[],
+        ) {
+          // biome-ignore lint/correctness/noUnusedFunctionParameters: <shadcn 本身套件設定，不檢查>
           cookiesToSet.forEach(({ name, value, options }) =>
-            request.cookies.set(name, value)
+            request.cookies.set(name, value),
           );
           supabaseResponse = NextResponse.next({
             request,
           });
           cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
+            supabaseResponse.cookies.set(name, value, options),
           );
         },
       },
-    }
+    },
   );
 
   // Do not run code between createServerClient and
@@ -95,21 +101,21 @@ export async function updateSession(request: NextRequest) {
   }
 
   if (user) {
-      // customer 不可進入 /admin/*
-      const isAdminRole = await isAdmin();
-      const isCustomerRole = !isAdminRole;
-      if (isAdminRoute && isCustomerRole) {
-        return NextResponse.redirect(new URL("/", request.url));
-      }
-      // admin 跳轉 (已經到 /admin 就不跳轉，否則會 too many redirect)
-      if (isAdminRole && !isAdminRoute) {
-        return NextResponse.redirect(new URL("/admin/dashboard", request.url));
-      }
-      // 已經登入就跳轉首頁，不可再進入登入頁
-      if (isAuthRoute) {
-        return NextResponse.redirect(new URL("/", request.url));
-      }
+    // customer 不可進入 /admin/*
+    const isAdminRole = await isAdmin();
+    const isCustomerRole = !isAdminRole;
+    if (isAdminRoute && isCustomerRole) {
+      return NextResponse.redirect(new URL("/", request.url));
     }
+    // admin 跳轉 (已經到 /admin 就不跳轉，否則會 too many redirect)
+    if (isAdminRole && !isAdminRoute) {
+      return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+    }
+    // 已經登入就跳轉首頁，不可再進入登入頁
+    if (isAuthRoute) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is.
   // If you're creating a new response object with NextResponse.next() make sure to:

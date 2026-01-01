@@ -1,6 +1,6 @@
-import { CarouselSize } from "@/app/(customer)/_components/carousel"
-import SectionTitle from "@/app/(customer)/_components/sectionTitle"
-import { ProductItems } from "@/app/(customer)/_components/carouselItems/productCard"
+import { CarouselSize } from "@/app/(customer)/_components/carousel";
+import { ProductItems } from "@/app/(customer)/_components/carouselItems/productCard";
+import SectionTitle from "@/app/(customer)/_components/sectionTitle";
 
 const NewItemsSection = () => {
   const newItems = [
@@ -12,7 +12,7 @@ const NewItemsSection = () => {
     { id: 6, image: "/banner.jpg", name: "節能家電", price: 100 },
     { id: 7, image: "/banner.jpg", name: "太陽能板", price: 100 },
     { id: 8, image: "/banner.jpg", name: "環保書籍", price: 100 },
-  ]
+  ];
   return (
     <>
       <SectionTitle title="New Items" />
@@ -20,7 +20,7 @@ const NewItemsSection = () => {
         <ProductItems products={newItems} tag={"new"} />
       </CarouselSize>
     </>
-  )
-}
+  );
+};
 
-export default NewItemsSection
+export default NewItemsSection;

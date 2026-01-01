@@ -1,14 +1,13 @@
 import type { SectionContainerProps } from "@/customer/_types/type";
 
-
 const SectionContainer = ({ children }: SectionContainerProps) => {
-  return(
+  return (
     <section className="bg-background pt-36 px-8">
       <div className="container mx-auto flex flex-col items-center">
         {children}
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default SectionContainer;

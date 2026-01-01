@@ -1,5 +1,5 @@
+import type { Session, User } from "@supabase/supabase-js";
 import { createServerClient } from "@/utils/supabase/server";
-import type { User, Session } from "@supabase/supabase-js";
 
 /**
  * 在伺服器端獲取當前用戶的 session（先驗證 user，再讀 session）

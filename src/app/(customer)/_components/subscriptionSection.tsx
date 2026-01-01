@@ -1,6 +1,6 @@
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Leaf } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function SubscriptionSection() {
   return (
@@ -9,7 +9,6 @@ export default function SubscriptionSection() {
       <div className="flex flex-col md:flex-row justify-between items-baseline gap-4">
         <h1 className="text-5xl md:text-8xl font-serif">YOUR FIRST PURCHASE</h1>
       </div>
-
 
       {/* Bottom Row: Content */}
       <div className="flex flex-col md:flex-row md:justify-end justify-between items-center gap-8">

@@ -1,6 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { CarouselItem } from "@/components/ui/carousel"
-import Image from "next/image"
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { CarouselItem } from "@/components/ui/carousel";
 
 // This component now generates the list of items, not just one card.
 export function CategoryItems() {
@@ -13,15 +13,12 @@ export function CategoryItems() {
     { id: 6, name: "節能家電" },
     { id: 7, name: "太陽能板" },
     { id: 8, name: "環保書籍" },
-  ]
+  ];
 
   return (
     <>
       {categories.map((category) => (
-        <CarouselItem
-          key={category.id}
-          className="md:basis-1/2 lg:basis-1/4"
-        >
+        <CarouselItem key={category.id} className="md:basis-1/2 lg:basis-1/4">
           <div className="p-1">
             <Card className="py-0">
               <CardContent className="relative flex aspect-square items-center justify-center p-6">
@@ -41,5 +38,5 @@ export function CategoryItems() {
         </CarouselItem>
       ))}
     </>
-  )
+  );
 }

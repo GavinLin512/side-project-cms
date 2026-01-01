@@ -1,4 +1,5 @@
-import { AppSidebar } from "@/components/app-sidebar"
+import { Toaster } from "sonner";
+import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,21 +7,20 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { Toaster } from "sonner"
-import { getServerSession } from "@/utils/supabase/auth";
+} from "@/components/ui/sidebar";
 import { AuthProvider } from "@/providers/auth-provider";
+import { getServerSession } from "@/utils/supabase/auth";
 
 export default async function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   const { user } = await getServerSession();
 
@@ -52,9 +52,9 @@ export default async function DashboardLayout({
               </Breadcrumb>
             </div>
           </header>
-          { children }
+          {children}
         </SidebarInset>
       </SidebarProvider>
     </AuthProvider>
-  )
+  );
 }

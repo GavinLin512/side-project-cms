@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
+import Autoplay from "embla-carousel-autoplay";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import type React from "react";
 import {
   Carousel,
   CarouselContent,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import Autoplay from "embla-carousel-autoplay"
-import React from "react"
+} from "@/components/ui/carousel";
 
 export function CarouselSize({ children }: { children: React.ReactNode }) {
-  const iconPrev = <ChevronLeft />
-  const iconNext = <ChevronRight />
+  const iconPrev = <ChevronLeft />;
+  const iconNext = <ChevronRight />;
   // 使用 Autoplay 需要 use client
   return (
     <Carousel
@@ -32,5 +32,5 @@ export function CarouselSize({ children }: { children: React.ReactNode }) {
         <CarouselNext className="static rounded-md" icon={iconNext} />
       </div>
     </Carousel>
-  )
+  );
 }

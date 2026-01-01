@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -5,17 +6,17 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import type { HeaderNavigationMenuProps } from '@/customer/_types/type'
-import Link from 'next/link';
-
+} from "@/components/ui/navigation-menu";
+import type { HeaderNavigationMenuProps } from "@/customer/_types/type";
 
 export function HeaderNavigationMenu(props: HeaderNavigationMenuProps) {
   return (
     <NavigationMenu className="hidden lg:block">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className='py-12 px-6 text-lg'>{props.menuText??''}</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="py-12 px-6 text-lg">
+            {props.menuText ?? ""}
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[300px] gap-4 rounded-none">
               <li>
@@ -23,13 +24,13 @@ export function HeaderNavigationMenu(props: HeaderNavigationMenuProps) {
                   return (
                     <NavigationMenuLink key={index} asChild>
                       <Link href={link.href}>
-                        <div className="font-medium">{link.text??''}</div>
+                        <div className="font-medium">{link.text ?? ""}</div>
                         <div className="text-muted-foreground">
-                          {link.description??''}
+                          {link.description ?? ""}
                         </div>
                       </Link>
                     </NavigationMenuLink>
-                  )
+                  );
                 })}
               </li>
             </ul>
@@ -37,5 +38,5 @@ export function HeaderNavigationMenu(props: HeaderNavigationMenuProps) {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  );
 }

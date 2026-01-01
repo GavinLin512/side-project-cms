@@ -1,9 +1,9 @@
 "use server";
 
-import { createServerClient } from "@/utils/supabase/server";
-import { getErrorMessage } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 import { isAdmin } from "@/app/actions/user";
+import { getErrorMessage } from "@/lib/utils";
+import { createServerClient } from "@/utils/supabase/server";
 
 export async function loginAction(formData: FormData) {
   try {
@@ -22,14 +22,14 @@ export async function loginAction(formData: FormData) {
       throw error;
     }
     // 重新快取頁面
-    revalidatePath('/', 'layout');
+    revalidatePath("/", "layout");
 
     const isAdminUser = await isAdmin();
     const redirectTo = isAdminUser ? "/admin/dashboard" : "/";
 
     return {
       success: true,
-      message: 'Logged in successfully',
+      message: "Logged in successfully",
       redirectTo,
     };
   } catch (error) {
@@ -66,7 +66,7 @@ export async function signUpAction(formData: FormData) {
 
     return {
       success: true,
-      message: 'Signed up successfully',
+      message: "Signed up successfully",
     };
   } catch (error) {
     return {
@@ -89,7 +89,7 @@ export async function logOutAction() {
 
     return {
       success: true,
-      message: 'Logged out successfully',
+      message: "Logged out successfully",
     };
   } catch (error) {
     return {
