@@ -1,14 +1,14 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 // 處理錯誤訊息
 export const getErrorMessage = (
   error: unknown,
-  defaultMessage: string = "未知的錯誤，請聯絡系統管理員"
+  defaultMessage: string = "未知的錯誤，請聯絡系統管理員",
 ) => {
   console.error(error);
   let errorMessage = defaultMessage;
@@ -16,4 +16,4 @@ export const getErrorMessage = (
     errorMessage = error.message;
   }
   return errorMessage;
-}
+};

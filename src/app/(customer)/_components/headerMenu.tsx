@@ -13,13 +13,20 @@ import {
 
 export default function HeaderMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuItems = [
-    [
-      { text: "All Products", href: "/products", shortcut: "⌘A" },
-      { text: "New Arrivals", href: "/products/new", shortcut: "⌘N" },
-    ],
-    [{ text: "On Sale", href: "/products/sale", shortcut: "⌘S" }],
+  const menuGroups = [
+    {
+      id: "general",
+      items: [
+        { text: "All Products", href: "/products", shortcut: "⌘A" },
+        { text: "New Arrivals", href: "/products/new", shortcut: "⌘N" },
+      ],
+    },
+    {
+      id: "sale",
+      items: [{ text: "On Sale", href: "/products/sale", shortcut: "⌘S" }],
+    },
   ];
+
   return (
     <Menubar onValueChange={(value) => setIsMenuOpen(!!value)}>
       <MenubarMenu>
@@ -27,25 +34,19 @@ export default function HeaderMenu() {
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </MenubarTrigger>
         <MenubarContent sideOffset={36}>
-          {menuItems.map((items, idx) => {
-            return (
-              <React.Fragment key={idx}>
-                {idx !== 0 ? <MenubarSeparator key={idx} /> : ""}
-                {items.map((item, idy) => {
-                  return (
-                    <MenubarItem key={idy}>
-                      <Link href={item.href}>{item.text}</Link>
-                      {item.shortcut ? (
-                        <MenubarShortcut>{item.shortcut}</MenubarShortcut>
-                      ) : (
-                        ""
-                      )}
-                    </MenubarItem>
-                  );
-                })}
-              </React.Fragment>
-            );
-          })}
+          {menuGroups.map((group, idx) => (
+            <React.Fragment key={group.id}>
+              {idx !== 0 && <MenubarSeparator />}
+              {group.items.map((item) => (
+                <MenubarItem key={item.href}>
+                  <Link href={item.href}>{item.text}</Link>
+                  {item.shortcut && (
+                    <MenubarShortcut>{item.shortcut}</MenubarShortcut>
+                  )}
+                </MenubarItem>
+              ))}
+            </React.Fragment>
+          ))}
         </MenubarContent>
       </MenubarMenu>
     </Menubar>

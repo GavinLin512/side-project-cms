@@ -56,8 +56,8 @@ const HeroSection = () => {
 
       {/* Bottom Card Content */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 w-full my-6">
-        {heroCardProps.map((card, index) => (
-          <Card key={index}>
+        {heroCardProps.map((card) => (
+          <Card key={card.description}>
             <CardHeader className="py-10">
               <CardTitle className="flex items-center justify-center">
                 {card.icon}

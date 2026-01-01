@@ -20,9 +20,9 @@ export function HeaderNavigationMenu(props: HeaderNavigationMenuProps) {
           <NavigationMenuContent>
             <ul className="grid w-[300px] gap-4 rounded-none">
               <li>
-                {props.menuLinks.map((link, index) => {
+                {props.menuLinks.map((link) => {
                   return (
-                    <NavigationMenuLink key={index} asChild>
+                    <NavigationMenuLink key={link.href} asChild>
                       <Link href={link.href}>
                         <div className="font-medium">{link.text ?? ""}</div>
                         <div className="text-muted-foreground">
