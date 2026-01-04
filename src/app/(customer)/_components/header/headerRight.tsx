@@ -1,10 +1,10 @@
 "use client";
 
-import { ShoppingCart, Heart, Search, User, LogOut } from "lucide-react";
+import { Heart, LogOut, Search, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
-import { useTransition, useEffect } from "react";
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useEffect, useTransition } from "react";
+import { toast } from "sonner";
 import { logOutAction } from "@/app/actions/auth";
 import { useAuth } from "@/providers/auth-provider";
 
@@ -26,7 +26,7 @@ export default function HeaderRight() {
     startTransition(async () => {
       // 呼叫 Server Action 清除後端 Session Cookie
       const { success, message } = await logOutAction();
-      
+
       if (!success) {
         toast.error(message);
       } else {

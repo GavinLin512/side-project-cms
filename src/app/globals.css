@@ -46,14 +46,14 @@
 :root {
   --radius: 0.625rem;
   --background: oklch(0.928 0.043 85.3); /* Milk: #F4E8DA */
-  --foreground: oklch(0.56 0.05 120);   /* Pistachio: #838A60 */
+  --foreground: oklch(0.56 0.05 120); /* Pistachio: #838A60 */
   --card: oklch(0.928 0.043 85.3);
   --card-foreground: oklch(0.56 0.05 120);
   --popover: oklch(0.928 0.043 85.3);
   --popover-foreground: oklch(0.56 0.05 120);
   --primary: oklch(0.56 0.05 120);
   --primary-foreground: oklch(0.928 0.043 85.3);
-  --secondary: oklch(0.65 0.1 80);      /* Orange: #BA9659 */
+  --secondary: oklch(0.65 0.1 80); /* Orange: #BA9659 */
   --secondary-foreground: oklch(0.928 0.043 85.3);
   --muted: oklch(0.928 0.043 85.3);
   --muted-foreground: oklch(0.6 0.05 120);

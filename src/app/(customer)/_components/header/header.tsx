@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
-import Link from 'next/link';
-import { Sprout } from 'lucide-react';
-import HeaderLeft from '@/app/(customer)/_components/header/headerLeft';
-import HeaderRight from '@/app/(customer)/_components/header/headerRight';
+import { Sprout } from "lucide-react";
+import Link from "next/link";
+import HeaderLeft from "@/app/(customer)/_components/header/headerLeft";
+import HeaderRight from "@/app/(customer)/_components/header/headerRight";
+
 // import type { User } from '@supabase/supabase-js';
 
 const Header = () => {
@@ -13,9 +14,14 @@ const Header = () => {
         {/* 左邊區域 */}
         <HeaderLeft />
         {/* 中間區域 */}
-        <Link href="/" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+        <Link
+          href="/"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
+        >
           <Sprout size={32} />
-          <span className="text-sm font-bold text-primary mt-1">GREEN CITY</span>
+          <span className="text-sm font-bold text-primary mt-1">
+            GREEN CITY
+          </span>
         </Link>
         {/* 右邊區域 */}
         <HeaderRight />

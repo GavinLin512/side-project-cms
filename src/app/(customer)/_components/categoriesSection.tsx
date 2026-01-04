@@ -1,6 +1,6 @@
-import { CarouselSize } from "@/app/(customer)/_components/carousel"
-import { CategoryItems } from "@/app/(customer)/_components/carouselItems/categoryCard"
-import SectionTitle from "@/app/(customer)/_components/sectionTitle"
+import { CarouselSize } from "@/app/(customer)/_components/carousel";
+import { CategoryItems } from "@/app/(customer)/_components/carouselItems/categoryCard";
+import SectionTitle from "@/app/(customer)/_components/sectionTitle";
 
 const CategoriesSection = () => {
   return (
@@ -10,9 +10,7 @@ const CategoriesSection = () => {
         <CategoryItems />
       </CarouselSize>
     </>
-  )
-}
+  );
+};
 
-export default CategoriesSection
-
-
+export default CategoriesSection;
