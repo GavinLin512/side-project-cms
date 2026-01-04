@@ -17,6 +17,9 @@ import {
 import { AuthProvider } from "@/providers/auth-provider";
 import { getServerSession } from "@/utils/supabase/auth";
 
+// 因為 getServerSession 會在伺服器端獲取用戶資訊 cookies，所以需要使用 force-dynamic
+export const dynamic = "force-dynamic";
+
 export default async function DashboardLayout({
   children,
 }: {
