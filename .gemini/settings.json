@@ -7,7 +7,7 @@
       "url": "https://mcp.context7.com/mcp",
       "headers": {
         "CONTEXT7_API_KEY": "ctx7sk-cbb2102f-e419-4d46-9931-4a0c945f085a",
-	      "Accept": "application/json, text/event-stream"
+        "Accept": "application/json, text/event-stream"
       }
     },
     "kaggle": {
@@ -29,4 +29,4 @@
       }
     }
   }
-}        
+}
