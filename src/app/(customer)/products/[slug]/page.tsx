@@ -1,8 +1,13 @@
 // test CI
-export default function ProductPage({ params }: { params: { slug: string } }) {
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
   return (
     <div>
-      <h1>Product Page {params.slug}</h1>
+      <h1>Product Page {slug}</h1>
     </div>
   );
 }
