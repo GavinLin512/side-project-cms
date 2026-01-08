@@ -1,0 +1,130 @@
+/// 性別分類
+enum Gender {
+  /// 男性
+  Men
+  /// 女性
+  Women
+  /// 中性
+  Unisex
+  /// 男孩
+  Boys
+  /// 女孩
+  Girls
+
+  @@schema("public")
+}
+
+/// 季節分類
+enum Season {
+  /// 春季
+  Spring
+  /// 夏季
+  Summer
+  /// 秋季
+  Fall
+  /// 冬季
+  Winter
+
+  @@schema("public")
+}
+
+/// 商品主表
+model Product {
+  /// 主鍵 ID
+  id            String             @id @default(cuid())
+  /// 商品名稱
+  name          String
+  /// URL 友善的唯一識別碼
+  slug          String             @unique
+  /// 商品描述
+  description   String?
+  /// 原價
+  price         Float
+  /// 特價（空值表示無特價）
+  salePrice     Float?
+  /// 庫存數量
+  stock         Int                @default(0)
+  /// 商品貨號
+  sku           String?            @unique
+  /// 品牌名稱
+  brand         String?
+  /// 是否為精選商品
+  featured      Boolean            @default(false)
+  /// 是否已上架
+  published     Boolean            @default(true)
+
+  /// 適用性別
+  gender        Gender?
+  /// 適用季節
+  season        Season?
+
+  /// 分類 ID
+  categoryId    String?
+  /// 所屬分類
+  category      Category?          @relation(fields: [categoryId], references: [id])
+  /// 商品屬性列表
+  attributes    ProductAttribute[]
+  /// 商品規格列表
+  variants      ProductVariant[]
+  /// 評論列表
+  reviews       Review[]
+  /// 購物車項目
+  cartItems     CartItem[]
+  /// 訂單項目
+  orderItems    OrderItem[]
+  /// 願望清單項目
+  wishlistItems WishlistItem[]
+
+  /// 建立時間
+  createdAt     DateTime           @default(now())
+  /// 更新時間
+  updatedAt     DateTime           @updatedAt
+
+  @@index([published, featured])
+  @@index([categoryId, published])
+  @@index([gender, season, published])
+  @@index([price])
+  @@index([createdAt])
+  @@schema("public")
+}
+
+/// 商品屬性（如：材質、產地等）
+model ProductAttribute {
+  /// 主鍵 ID
+  id        String  @id @default(cuid())
+  /// 屬性名稱
+  name      String
+  /// 屬性值
+  value     String
+  /// 所屬商品 ID
+  productId String
+  /// 所屬商品
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, name, value])
+  @@schema("public")
+}
+
+/// 商品規格（如：顏色、尺寸組合）
+model ProductVariant {
+  /// 主鍵 ID
+  id         String   @id @default(cuid())
+  /// 規格貨號
+  sku        String   @unique
+  /// 規格價格
+  price      Float
+  /// 規格特價
+  salePrice  Float?
+  /// 規格庫存
+  stock      Int      @default(0)
+  /// 規格屬性（JSON 格式，如：{"color": "紅", "size": "M"}）
+  attributes Json
+  /// 規格圖片列表
+  images     String[]
+  /// 所屬商品 ID
+  productId  String
+  /// 所屬商品
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@schema("public")
+}

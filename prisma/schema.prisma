@@ -3,21 +3,26 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-  schemas   = ["public"]
+  provider = "postgresql"
+  schemas  = ["public"]
 }
 
-// user 資訊
+/// 使用者個人資料
 model Profile {
-  id            String         @id @default(uuid()) @db.Uuid
+  /// 主鍵 ID
+  id            String         @id @default(cuid())
+  /// Supabase Auth 使用者 ID
+  userId        String         @unique @default(uuid()) @db.Uuid
+  /// 使用者名稱
+  name          String
+  /// 購物車項目
   cartItems     CartItem[]
+  /// 訂單列表
   orders        Order[]
+  /// 評論列表
   reviews       Review[]
+  /// 願望清單項目
   wishlistItems WishlistItem[]
-  userId        String         @unique @default(uuid()) @db.Uuid // 需要自行連結 supabase auth.users 建立關聯
-  name          String         
 
   @@schema("public")
 }

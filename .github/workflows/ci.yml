@@ -29,6 +29,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # 快取 TypeScript 增量編譯資訊，加速類型檢查
+      - name: Cache TypeScript build info
+        uses: actions/cache@v4
+        with:
+          path: tsconfig.tsbuildinfo
+          key: tsbuildinfo-${{ runner.os }}-${{ hashFiles('**/*.ts', '**/*.tsx', 'tsconfig.json') }}
+          restore-keys: |
+            tsbuildinfo-${{ runner.os }}-
+
       # 1. 程式碼風格檢查 (Linting & Formatting)
       # 使用 Biome 因為專案中有 biome.json
       - name: Lint & Format Check (Biome)

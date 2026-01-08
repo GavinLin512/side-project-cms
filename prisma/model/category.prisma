@@ -1,0 +1,27 @@
+/// 商品分類（支援多層級）
+model Category {
+  /// 主鍵 ID
+  id            String     @id @default(cuid())
+  /// 分類名稱
+  name          String
+  /// URL 友善的唯一識別碼
+  slug          String     @unique
+  /// 分類描述
+  description   String?
+  /// 分類圖片 URL
+  image         String?
+  /// 分類層級（0 為根分類）
+  level         Int
+  /// 父分類 ID
+  parentId      String?
+  /// 父分類
+  parent        Category?  @relation("CategoryToSubcategory", fields: [parentId], references: [id])
+  /// 子分類列表
+  subcategories Category[] @relation("CategoryToSubcategory")
+  /// 分類下的商品
+  products      Product[]
+
+  @@index([parentId])
+  @@index([level])
+  @@schema("public")
+}

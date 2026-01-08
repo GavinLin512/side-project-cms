@@ -1,0 +1,24 @@
+/// 購物車項目
+model CartItem {
+  /// 主鍵 ID
+  id        String   @id @default(cuid())
+  /// 購買數量
+  quantity  Int      @default(1)
+  /// 使用者 ID
+  userId    String
+  /// 商品 ID
+  productId String
+  /// 商品規格 ID（可選）
+  variantId String?
+  /// 加入購物車時間
+  createdAt DateTime @default(now())
+  /// 更新時間
+  updatedAt DateTime @updatedAt
+  /// 關聯商品
+  product   Product  @relation(fields: [productId], references: [id])
+  /// 關聯使用者
+  user      Profile  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId, variantId])
+  @@schema("public")
+}
