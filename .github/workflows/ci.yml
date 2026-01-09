@@ -32,6 +32,8 @@ jobs:
       # 生成 Prisma Client（TypeScript 類型需要）
       - name: Generate Prisma Client
         run: pnpm exec prisma generate
+        env:
+          DIRECT_URL: "${{ secrets.DIRECT_URL }}"
 
       # 快取 TypeScript 增量編譯資訊，加速類型檢查
       - name: Cache TypeScript build info
