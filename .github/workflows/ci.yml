@@ -33,7 +33,7 @@ jobs:
       - name: Generate Prisma Client
         run: pnpm exec prisma generate
         env:
-          DIRECT_URL: "${{ secrets.DIRECT_URL }}"
+          DIRECT_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
 
       # 快取 TypeScript 增量編譯資訊，加速類型檢查
       - name: Cache TypeScript build info
