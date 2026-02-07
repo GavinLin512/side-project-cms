@@ -1,5 +1,6 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { ProductDetails } from "./_components/ProductDetails";
 import { ProductGallery } from "./_components/ProductGallery";
 import { ProductInfo } from "./_components/ProductInfo";
 import { RelatedProducts } from "./_components/RelatedProducts";
@@ -116,8 +117,12 @@ export default async function ProductPage({
           </div>
         </div>
 
-        {/* Reviews */}
         <div className="mt-16 border-t border-[#8F9B6B]/20 pt-16">
+          <ProductDetails product={PRODUCT} />
+        </div>
+
+        {/* Reviews */}
+        <div className="mt-8 border-t border-[#8F9B6B]/20 pt-16">
           <ReviewsSection reviews={REVIEWS} />
         </div>
 
