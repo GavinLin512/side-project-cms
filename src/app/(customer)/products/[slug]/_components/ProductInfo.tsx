@@ -1,169 +1,97 @@
 "use client";
 
-import { Heart, Minus, Plus, Star } from "lucide-react";
+import { Heart, Minus, Plus, ShoppingCart } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button"; // Assuming shadcn button exists
+import type { Product } from "@/features/products/types";
 
 interface ProductInfoProps {
-  product: {
-    name: string;
-    price: number;
-    description: string;
-    rating: number;
-    reviewCount: number;
-    colors: string[];
-    composition?: string;
-  };
+  product: Product;
 }
 
 export function ProductInfo({ product }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+
+  const increment = () => setQuantity((q) => q + 1);
+  const decrement = () => setQuantity((q) => Math.max(1, q - 1));
 
   return (
-    <div className="flex flex-col gap-6 font-sans text-[#333333]">
-      {/* Title & Rating */}
+    <div className="flex flex-col gap-6">
+      {/* Header */}
       <div className="space-y-2">
-        <h1 className="font-serif text-4xl font-normal tracking-wide text-[#333333] md:text-5xl">
-          {product.name}
-        </h1>
-        <div className="flex items-center gap-2">
-          <div className="flex text-[#8F9B6B]">
-            {[1, 2, 3, 4, 5].map((starValue) => (
-              <Star
-                key={starValue}
-                className={cn(
-                  "h-4 w-4",
-                  starValue <= Math.round(product.rating)
-                    ? "fill-current"
-                    : "text-gray-300",
-                )}
-              />
-            ))}
-          </div>
-          <span className="text-sm text-gray-500">
-            {product.reviewCount} reviews
+        {product.badges?.map((badge) => (
+          <span
+            key={badge}
+            className="inline-block rounded-sm bg-[#838A60] px-2 py-1 text-xs font-medium text-white mr-2"
+          >
+            {badge}
           </span>
+        ))}
+        <h1 className="font-sans text-3xl font-bold text-[#1A1A1A]">
+          {product.title}
+        </h1>
+        <div className="flex items-center gap-4">
+          <span className="font-serif text-2xl font-semibold text-[#1A1A1A]">
+            ${product.price}
+          </span>
+          {product.originalPrice && (
+            <span className="font-serif text-lg text-gray-400 line-through">
+              ${product.originalPrice}
+            </span>
+          )}
         </div>
       </div>
 
       {/* Description */}
-      <div className="space-y-4 text-sm leading-relaxed text-gray-600">
-        <p>{product.description}</p>
-        {product.composition && (
-          <div className="grid grid-cols-[100px_1fr] items-center">
-            <span className="font-semibold text-gray-900">Composition:</span>
-            <span>{product.composition}</span>
-          </div>
-        )}
+      <div className="prose prose-stone max-w-none text-gray-600">
+        <p>{product.description || "No description available."}</p>
       </div>
 
-      {/* Color Selector */}
-      <div className="space-y-3">
-        <Label className="text-base font-medium">Color:</Label>
-        <RadioGroup
-          value={selectedColor}
-          onValueChange={setSelectedColor}
-          className="flex gap-3"
-        >
-          {product.colors.map((color) => (
-            <div key={color} className="relative">
-              <RadioGroupItem
-                value={color}
-                id={`color-${color}`}
-                className="peer sr-only"
-              />
-              <Label
-                htmlFor={`color-${color}`}
-                className={cn(
-                  "block h-8 w-8 cursor-pointer rounded-full border border-gray-200 shadow-sm ring-offset-2 transition-all hover:scale-110 peer-checked:ring-2 peer-checked:ring-[#8F9B6B]",
-                  {
-                    "bg-[#F3EFE2]": color === "beige",
-                    "bg-[#8F9B6B]": color === "olive",
-                    "bg-[#7B8668]": color === "dark-olive",
-                    "bg-[#333333]": color === "black",
-                  },
-                )}
-                style={{
-                  backgroundColor: ![
-                    "beige",
-                    "olive",
-                    "dark-olive",
-                    "black",
-                  ].includes(color)
-                    ? color
-                    : undefined,
-                }}
-              />
-            </div>
-          ))}
-        </RadioGroup>
-      </div>
-
-      {/* Price & Actions */}
-      <div className="flex flex-wrap items-center justify-between gap-6 pt-4">
+      {/* Actions */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
         {/* Quantity */}
-        <div className="flex h-12 items-center rounded-md border border-gray-300 bg-[#F9F5F0] px-2">
+        <div className="flex items-center rounded-md border border-gray-200">
           <button
             type="button"
-            onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="flex h-full w-10 items-center justify-center text-gray-600 hover:text-black"
+            onClick={decrement}
+            className="p-3 hover:bg-gray-50"
           >
             <Minus className="h-4 w-4" />
           </button>
-          <span className="w-8 text-center text-lg font-medium">
-            {quantity}
-          </span>
+          <span className="w-12 text-center font-medium">{quantity}</span>
           <button
             type="button"
-            onClick={() => setQuantity(quantity + 1)}
-            className="flex h-full w-10 items-center justify-center text-gray-600 hover:text-black"
+            onClick={increment}
+            className="p-3 hover:bg-gray-50"
           >
             <Plus className="h-4 w-4" />
           </button>
         </div>
 
-        {/* Price */}
-        <div className="text-3xl font-medium tracking-tight">
-          ${product.price}
-        </div>
-      </div>
-
-      <div className="hidden md:flex gap-4 pt-2">
-        <Button className="h-14 flex-1 rounded-md bg-[#B08D55] text-lg font-medium text-white shadow-sm hover:bg-[#9A7B4A]">
+        {/* Add to Cart */}
+        <Button className="flex-1 bg-[#BA9659] hover:bg-[#A6854D] h-12 text-base">
+          <ShoppingCart className="mr-2 h-5 w-5" />
           Add to cart
         </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          className="h-14 w-14 rounded-md border-[#8F9B6B] text-[#8F9B6B] hover:bg-[#F3EFE2] hover:text-[#7B8668]"
+
+        {/* Wishlist */}
+        <button
+          type="button"
+          className="flex h-12 w-12 items-center justify-center rounded-md border border-gray-200 hover:bg-gray-50 text-gray-700 hover:text-red-500 transition-colors"
         >
-          <Heart className="h-6 w-6" />
-        </Button>
+          <Heart className="h-5 w-5" />
+        </button>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between border-t border-gray-200 bg-white px-4 py-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] md:hidden">
-        <div className="flex flex-col">
-          <span className="text-xs text-gray-500 font-medium">Total</span>
-          <span className="text-lg font-bold text-[#333333]">
-            ${(product.price * quantity).toFixed(2)}
+      {/* Metadata */}
+      <div className="border-t border-gray-100 pt-6 text-sm text-gray-500">
+        <p>
+          Category:{" "}
+          <span className="text-[#1A1A1A]">
+            {product.category || "General"}
           </span>
-        </div>
-        <div className="flex gap-3">
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-12 w-12 rounded-full border-[#8F9B6B] text-[#8F9B6B]"
-          >
-            <Heart className="h-5 w-5" />
-          </Button>
-          <Button className="h-12 px-8 rounded-full bg-[#B08D55] text-base font-medium text-white hover:bg-[#9A7B4A]">
-            Add to cart
-          </Button>
-        </div>
+        </p>
+        <p>SKU: {product.id}</p>
       </div>
     </div>
   );

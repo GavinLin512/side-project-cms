@@ -2,81 +2,55 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
 interface ProductGalleryProps {
   images: string[];
+  title: string;
 }
 
-export function ProductGallery({ images }: ProductGalleryProps) {
+export function ProductGallery({ images, title }: ProductGalleryProps) {
   const [selectedImage, setSelectedImage] = useState(0);
 
+  if (!images?.length) return null;
+
   return (
-    <div className="w-full">
-      {/* Mobile View: Carousel */}
-      <div className="block md:hidden">
-        <Carousel className="w-full">
-          <CarouselContent>
-            {images.map((img, index) => (
-              <CarouselItem key={img}>
-                <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
-                  <Image
-                    src={img}
-                    alt={`Product image ${index + 1}`}
-                    fill
-                    className="object-cover"
-                    priority={index === 0}
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+    <div className="flex flex-col gap-4">
+      {/* Main Image */}
+      <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-[#F4F4F5]">
+        <Image
+          src={images[selectedImage]}
+          alt={title}
+          fill
+          className="object-cover"
+          priority
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
       </div>
 
-      {/* Desktop View: Thumbnails + Main Image */}
-      <div className="hidden md:grid md:grid-cols-5 md:gap-4">
-        {/* Thumbnails Column */}
-        <div className="col-span-1 flex flex-col gap-4">
-          {images.map((img, index) => (
-            <button
-              key={img}
-              type="button"
-              onClick={() => setSelectedImage(index)}
-              className={cn(
-                "relative aspect-square w-full overflow-hidden rounded-lg border-2 transition-all",
-                selectedImage === index
-                  ? "border-[#8F9B6B]"
-                  : "border-transparent hover:border-gray-200",
-              )}
-            >
-              <Image
-                src={img}
-                alt={`Thumbnail ${index + 1}`}
-                fill
-                className="object-cover"
-              />
-            </button>
-          ))}
-        </div>
-
-        {/* Main Image */}
-        <div className="col-span-4">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-gray-100">
+      {/* Thumbnails */}
+      <div className="flex gap-4 overflow-x-auto pb-2">
+        {images.map((img, index) => (
+          <button
+            key={img} // Using image URL as key since it's unique enough for thumbnails
+            type="button"
+            onClick={() => setSelectedImage(index)}
+            className={cn(
+              "relative aspect-square w-20 flex-shrink-0 overflow-hidden rounded-md border-2",
+              selectedImage === index
+                ? "border-[#BA9659]"
+                : "border-transparent hover:border-gray-200",
+            )}
+          >
             <Image
-              src={images[selectedImage]}
-              alt="Product Main Image"
+              src={img}
+              alt={`${title} thumbnail ${index + 1}`}
               fill
-              className="object-cover transition-all duration-500 hover:scale-105"
-              priority
+              className="object-cover"
+              sizes="80px"
             />
-          </div>
-        </div>
+          </button>
+        ))}
       </div>
     </div>
   );
